@@ -9,10 +9,13 @@ function createNavbar(){
     html += '                <span class="icon-bar"></span>';
     html += '                <span class="icon-bar"></span>';
     html += '            </button>';
-    html += '            <a href="/" class="navbar-brand">Blockchain Demo</a>';
+    html += '            <a href="../index.html" class="navbar-brand">Blockchain</a>';
     html += '        </div>';
     html += '        <div id="navbar" class="collapse navbar-collapse">';
     html += '            <ul class="nav navbar-nav navbar-right">';
+    html += '                <li>';
+    html += '                    <p class="navbar-text">BASICS: </p>';
+    html += '                </li>';
     html += '                <li>';
     html += '                    <a href="hash.html">Hash</a>';
     html += '                </li>';

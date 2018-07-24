@@ -25,44 +25,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
-                    class="navbar-toggle collapsed">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">Blockchain Demo</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/hash">Hash</a>
-                    </li>
-                    <li>
-                        <a href="/block">Block</a>
-                    </li>
-                    <li class="active">
-                        <a href="/blockchain">Blockchain</a>
-                    </li>
-                    <li>
-                        <a href="/distributed">Distributed</a>
-                    </li>
-                    <li>
-                        <a href="/tokens">Tokens</a>
-                    </li>
-                    <li>
-                        <a href="/coinbase">Coinbase</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div id="navbar"></div>
     <div class="container-fluid">
-        <h1>Blockchain</h1>
+        <h1>BASICS: Blockchain</h1>
         <div class="row row-horizon">
             <div class="col-xs-7">
                 <div id="block1chain1well" class="well">
@@ -347,7 +312,9 @@
                     l.stop();
                 }, 250); // give UI time to update
             });
-        }</script>
+        }
+    </script>
+    <script src="assets/javascripts/navbar.js"></script>            
 </body>
 
 </html>

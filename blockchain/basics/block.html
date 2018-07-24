@@ -30,7 +30,7 @@
 <body>
     <div id="navbar"></div>
     <div class="container">
-        <h1>Block</h1>
+        <h1>BASICS: Block</h1>
         <div id="block1chain1well" class="well">
             <form class="form-horizontal">
                 <div class="form-group">
@@ -96,9 +96,6 @@
             var nonce = $('#block' + block + 'chain' + chain + 'nonce').val();
             var data  = $('#block' + block + 'chain' + chain + 'data').val();
             var text  = block + nonce + data;
-
-            // update
-            update(text);
             return text;
         }
 
@@ -114,15 +111,23 @@
             });
         }
 
-        function update(text){
+        function update(){
+            var block = $('#block1chain1number').val();
+            var nonce = $('#block1chain1nonce').val();
+            var data  = $('#block1chain1data').val();
+            var text  = block + nonce + data;
+
             var hash = CryptoJS.SHA256(text).toString();
             console.log(hash);
 
             // identicon
             var roundIcon = document.getElementById('roundIcon');
             roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:hash ,size: 8,scale: 3}),4).toDataURL()+')';
-
         }
+
+    $('#block1chain1number').on('input',function(){ update(); });
+    $('#block1chain1nonce').on('input',function(){ update(); });
+    $('#block1chain1data').on('input',function(){ update(); });    
 
     </script>
     <script src="assets/javascripts/navbar.js"></script>        
