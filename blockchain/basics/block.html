@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A live blockchain demo in a browser.">
+    <meta name="author" content="Anders Brownworth">
+    <link rel="icon" href="assets/favicon.ico">
+    <title>Blockchain Demo</title>
+    <link rel="stylesheet" href="assets/stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="assets/stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/lib/ie10-viewport-bug-workaround.css">
+    <link rel="stylesheet" href="assets/stylesheets/blockchain.css">
+    <link rel="stylesheet" href="assets/stylesheets/blockies.css">    
+    <script src="assets/javascripts/lib/jquery.min.js"></script>
+    <script src="assets/javascripts/lib/bootstrap.min.js"></script>
+    <script src="assets/javascripts/lib/spin.min.js"></script>
+    <script src="assets/javascripts/lib/ladda.min.js"></script>
+    <script src="assets/javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="assets/javascripts/lib/sha256.js"></script>
+    <script src="assets/javascripts/blockchain.js"></script>
+    <script src="assets/javascripts/blockies.js"></script>    
+    <script src="assets/javascripts/blockies_optimizations.js"></script>    
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <div class="container">
+        <h1>Block</h1>
+        <div id="block1chain1well" class="well">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="block1chain1number" class="col-sm-2 control-label">Block:</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">#</span>
+                            <input id="block1chain1number" type="number" value="1" onchange="updateHash(1, 1);" onkeyup="updateHash(1, 1);"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="block1chain1nonce" class="col-sm-2 control-label">Nonce:</label>
+                    <div class="col-sm-10">
+                        <input id="block1chain1nonce" type="text" value="72608" onkeyup="updateHash(1, 1);" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="block1chain1data" class="col-sm-2 control-label">Data:</label>
+                    <div class="col-sm-10">
+                        <textarea id="block1chain1data" rows="10" onkeyup="updateHash(1, 1);" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div id="state" class="form-group">
+                    <label for="block1chain1hash" class="col-sm-2 control-label">Hash:</label>
+                    <div class="col-sm-10">
+                        <input id="block1chain1hash" type="text" disabled class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="identicon" class="col-sm-2 control-label">Identicon:</label>
+                    <div class="col-sm-10">
+                        <div id="identicon"></div>
+                        <div id="roundIcon" class="identicon"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <i class="icon-spinner icon-spin icon-large"></i>
+                    </div>
+                    <div class="col-sm-10">
+                        <button id="block1chain1mineButton" data-style="expand-right" class="btn btn-primary ladda-button">
+                            <span class="ladda-label">Mine</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    <script>
+        $(function () {
+            mineButtonAnimation(1, 1);
+            updateHash(1, 1);
+        });
+
+        function getText(block, chain) {
+            var block = $('#block' + block + 'chain' + chain + 'number').val();
+            var nonce = $('#block' + block + 'chain' + chain + 'nonce').val();
+            var data  = $('#block' + block + 'chain' + chain + 'data').val();
+            var text  = block + nonce + data;
+
+            // update
+            update(text);
+            return text;
+        }
+
+        function mineButtonAnimation(block, chain) {
+            $('#block' + block + 'chain' + chain + 'mineButton').click(function (e) {
+                e.preventDefault();
+                var l = Ladda.create(this);
+                l.start();
+                setTimeout(function () {
+                    mine(block, chain, false);
+                    l.stop();
+                }, 250); // give UI time to update
+            });
+        }
+
+        function update(text){
+            var hash = CryptoJS.SHA256(text).toString();
+            console.log(hash);
+
+            // identicon
+            var roundIcon = document.getElementById('roundIcon');
+            roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:hash ,size: 8,scale: 3}),4).toDataURL()+')';
+
+        }
+
+    </script>
+    <script src="assets/javascripts/navbar.js"></script>        
+</body>
+
+</html>
