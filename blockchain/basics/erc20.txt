@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
 // ----------------------------------------------------------------------------
-// 'ABEL' 'Example Abel Supply Token' token contract
+// 'ABEL' 'Example ABEL Supply Token' token contract
 //
 // Symbol      : ABEL
 // Name        : Abel Token
@@ -109,11 +109,11 @@ contract AbelToken is ERC20Interface, Owned {
     // ------------------------------------------------------------------------
     function AbelToken() public {
         symbol = "ABEL";
-        name = "Abel Token";
+        name = "ABEL Token";
         decimals = 18;
         _totalSupply = 1000000 * 10**uint(decimals);
-        balances[0x72ac0213dCbe1F1970e583Cbb4894da3e88eCa1b] = _totalSupply;
-        Transfer(address(0), 0x72ac0213dCbe1F1970e583Cbb4894da3e88eCa1b, _totalSupply);
+        balances[owner] = _totalSupply;
+        emit Transfer(address(0), owner, _totalSupply);        
     }
 
 
